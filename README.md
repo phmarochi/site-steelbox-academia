@@ -6,7 +6,10 @@ Site estático (HTML + CSS + JS), sem build. Publicado na Vercel.
 
 ## Estrutura
 - `index.html` — página única
-- `styles.css`, `script.js`
+- `css/site.css` — visual "aço temperado" (fontes Big Shoulders + Archivo em `fonts/`)
+- `js/forge.js` — emblema SB em 3D (Three.js) forjado na abertura, com faíscas
+- `js/site.js` — rolagem suave (Lenis), animações de rolagem (GSAP), avaliações e interações
+- `vendor/` — bibliotecas hospedadas no próprio site (sem depender de CDN)
 - `assets/logo.svg` — logo "SB" redesenhado em vetor
 - `fotos/` — fotos do Instagram e do Google Meu Negócio da academia
 

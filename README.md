@@ -6,12 +6,12 @@ Site estático (HTML + CSS + JS), sem build. Publicado na Vercel.
 
 ## Estrutura
 - `index.html` — página única
-- `css/site.css` — visual "aço temperado" (fontes Big Shoulders + Archivo em `fonts/`)
-- `js/forge.js` — emblema SB em 3D (Three.js) forjado na abertura, com faíscas
-- `js/site.js` — rolagem suave (Lenis), animações de rolagem (GSAP), avaliações e interações
+- `css/site.css` — visual nas cores da marca (marinho, grafite e o azul da fachada), fonte Archivo expandida
+- `js/site.js` — rolagem suave (Lenis), animações e 3D em CSS (GSAP), avaliações e interações
 - `vendor/` — bibliotecas hospedadas no próprio site (sem depender de CDN)
-- `assets/logo.svg` — logo "SB" redesenhado em vetor
-- `fotos/` — fotos do Instagram e do Google Meu Negócio da academia
+- `assets/` — logo oficial da Steelbox vetorizada a partir da arte do Google Meu Negócio:
+  `logo.svg` (cores originais), `logo-escuro.svg` (para fundo escuro), `logo-branca.svg`, `simbolo.svg`, `simbolo-branco.svg`
+- `fotos/` — fotos do Instagram e do Google Meu Negócio, no formato original (sem cortes)
 
 ## Antes de lançar oficialmente
 A prévia está **sem indexação no Google**. Quando o cliente aprovar:

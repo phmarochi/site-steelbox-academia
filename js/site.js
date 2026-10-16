@@ -122,34 +122,46 @@
     if (timer) (inView && !hovering) ? timer.resume() : timer.pause();
   }, { threshold: 0.3 }).observe(stage);
 
+  /* ---------- abertura: qual versão está na tela ---------- */
+  var topo = document.documentElement.getAttribute('data-topo') === 'b' ? 'b' : 'a';
+  document.querySelector(topo === 'a' ? '.hero-b' : '.hero-a').remove();
+  if (topo === 'b') document.querySelector('.hero-b').hidden = false;
+
+  /* A: no celular, vídeo da academia em loop (sem som) */
+  var video = document.querySelector('.ha-video');
+  if (video && window.matchMedia('(max-width: 767px)').matches && !reduced) {
+    video.src = video.dataset.src;
+    video.play().catch(function () {});
+  }
+
+  /* B: fotos trocando a cada 6 segundos */
+  var slides = document.querySelectorAll('.hb-slide');
+  if (slides.length && !reduced) {
+    var dotsB = document.querySelectorAll('.hb-dots i'), si = 0;
+    setInterval(function () {
+      slides[si].classList.remove('is-on'); dotsB[si].classList.remove('is-on');
+      si = (si + 1) % slides.length;
+      slides[si].classList.add('is-on');
+      void dotsB[si].offsetWidth; dotsB[si].classList.add('is-on');
+    }, 6000);
+  }
+
   if (!hasGsap || reduced) return;
 
-  /* ---------- abertura ---------- */
   var intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
-  intro.from('.hero-logo', { clipPath: 'inset(0 100% 0 0)', x: -40, duration: 1.2 })
-    .from('.hl > span', { yPercent: 110, duration: 1.1, stagger: 0.1 }, '-=0.7')
-    .from(['.hero-sub', '.hero-actions', '.hero-rating'], { opacity: 0, y: 20, duration: 0.9, stagger: 0.08, ease: 'power3.out' }, '-=0.7')
-    .from('.card-back', { opacity: 0, x: -60, rotateY: 30, duration: 1.4 }, 0.2)
-    .from('.card-front', { opacity: 0, y: 80, rotateX: 12, duration: 1.4 }, 0.35)
-    .from('.stage-tag', { opacity: 0, x: -30, duration: 1 }, 0.9);
+  if (topo === 'a') {
+    intro.from('.ha-title .hl > span', { yPercent: 110, duration: 1.2, stagger: 0.12, delay: 0.15 })
+      .from('.ha-row', { opacity: 0, y: 24, duration: 1 }, '-=0.7');
+    gsap.to('.ha-content', { y: -80, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.ha-media', { yPercent: 18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  } else {
+    intro.from('.hb-logo', { clipPath: 'inset(0 100% 0 0)', x: -60, duration: 1.4, delay: 0.15 })
+      .from('.hb-claim', { opacity: 0, letterSpacing: '0.8em', duration: 1.4 }, '-=0.9')
+      .from('.hb-bottom > *', { opacity: 0, y: 20, duration: 0.9, stagger: 0.08 }, '-=1');
+    gsap.to('.hb-center', { y: -70, scale: 0.94, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  }
 
   var mm = gsap.matchMedia();
-
-  mm.add('(min-width: 981px)', function () {
-    /* palco em 3D: inclina de leve com o mouse e se abre ao rolar */
-    var st = document.querySelector('.stage');
-    if (finePointer) {
-      var ry = gsap.quickTo(st, 'rotationY', { duration: 1, ease: 'power3.out' });
-      var rx = gsap.quickTo(st, 'rotationX', { duration: 1, ease: 'power3.out' });
-      window.addEventListener('pointermove', function (e) {
-        ry((e.clientX / innerWidth - 0.5) * 10);
-        rx(-(e.clientY / innerHeight - 0.5) * 7);
-      }, { passive: true });
-    }
-    gsap.to('.card-back', { z: -220, x: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.card-front', { z: 140, y: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.hero-text', { y: -60, opacity: 0.3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-  });
 
   /* ---------- faixa: anda sozinha e acelera com a rolagem ---------- */
   var belt = document.querySelector('.belt-track');

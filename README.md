@@ -11,7 +11,15 @@ Site estático (HTML + CSS + JS), sem build. Publicado na Vercel.
 - `vendor/` — bibliotecas hospedadas no próprio site (sem depender de CDN)
 - `assets/` — logo oficial da Steelbox vetorizada a partir da arte do Google Meu Negócio:
   `logo.svg` (cores originais), `logo-escuro.svg` (para fundo escuro), `logo-branca.svg`, `simbolo.svg`, `simbolo-branco.svg`
-- `fotos/` — fotos do Instagram e do Google Meu Negócio, no formato original (sem cortes)
+- `fotos/` — fotos do Instagram e do Google Meu Negócio, no formato original (sem cortes); `topo-*.jpg` são as fotos em alta do topo
+- `videos/topo.mp4` — vídeo curto (sem som) montado com trechos dos reels, usado no topo pelo celular
+
+## Topo que alterna
+O topo tem duas versões que se revezam a cada visita (guardado no navegador do visitante):
+- **A**: foto/vídeo em tela cheia com "Forjados no aço" grande
+- **B**: logo grande no centro com fotos trocando ao fundo
+
+Para ver uma versão específica: `?topo=a` ou `?topo=b` no fim do link.
 
 ## Antes de lançar oficialmente
 A prévia está **sem indexação no Google**. Quando o cliente aprovar:

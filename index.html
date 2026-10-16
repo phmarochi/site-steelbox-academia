@@ -11,6 +11,10 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/site.css">
+  <script>
+    /* Alterna o topo a cada visita: A, B, A, B... (?topo=a ou ?topo=b força uma versão) */
+    (function(){var v='a';try{var q=(location.search.match(/topo=(a|b)/)||[])[1];if(q){v=q}else{var n=parseInt(localStorage.getItem('sb-visitas')||'0',10)+1;localStorage.setItem('sb-visitas',n);v=n%2?'a':'b'}}catch(e){}document.documentElement.setAttribute('data-topo',v)})();
+  </script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
@@ -39,27 +43,45 @@
 
 <main id="conteudo">
 
-  <!-- ABERTURA -->
+  <!-- ABERTURA: duas versões que se alternam a cada visita (A e B) -->
   <section class="hero" id="inicio" aria-label="Steelbox Academia">
-    <div class="hero-text">
-      <img class="hero-logo" src="assets/logo-escuro.svg" alt="Steelbox Academia" width="560" height="106">
-      <h1 class="hero-title">
-        <span class="hl"><span>Forjados</span></span>
-        <span class="hl"><span>no aço</span></span>
-      </h1>
-      <p class="hero-sub">Agora Uvaranas tem uma academia de verdade. Aparelhos novos, espaço de sobra e professores que corrigem a sua execução.</p>
-      <div class="hero-actions">
-        <a class="btn btn-blue magnetic" href="https://wa.me/5542984197324?text=Ol%C3%A1!%20Quero%20agendar%20uma%20visita%20na%20Steelbox." target="_blank" rel="noopener"><span>Agendar uma visita</span></a>
-        <a class="btn btn-line" href="#unidades"><span>Ver as unidades</span></a>
+
+    <!-- Versão A: foto/vídeo em tela cheia e frase grande -->
+    <div class="hero-a">
+      <div class="ha-media" aria-hidden="true">
+        <picture class="ha-photo"><img src="fotos/topo-cardio.jpg" alt="" width="1920" height="1080" fetchpriority="high"></picture>
+        <video class="ha-video" muted loop playsinline preload="none" poster="videos/topo-poster.jpg" data-src="videos/topo.mp4"></video>
       </div>
-      <p class="hero-rating"><strong>4,8</strong> no Google, com 200 avaliações</p>
+      <div class="ha-content">
+        <h1 class="ha-title"><span class="hl"><span>Forjados</span></span><span class="hl"><span>no aço</span></span></h1>
+        <div class="ha-row">
+          <p>Agora Uvaranas tem uma academia de verdade. Aparelhos novos, espaço de sobra e professores que corrigem a sua execução.</p>
+          <div class="hero-actions">
+            <a class="btn btn-blue magnetic" href="https://wa.me/5542984197324?text=Ol%C3%A1!%20Quero%20agendar%20uma%20visita%20na%20Steelbox." target="_blank" rel="noopener"><span>Agendar uma visita</span></a>
+            <a class="btn btn-line" href="#unidades"><span>Ver as unidades</span></a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="hero-stage" aria-hidden="true">
-      <div class="stage">
-        <figure class="card card-back"><img src="fotos/porsol.jpg" alt="" width="1079" height="599"></figure>
-        <figure class="card card-front"><img src="fotos/fachada.jpg" alt="" width="669" height="1198"></figure>
-        <div class="stage-tag"><img src="assets/simbolo-branco.svg" alt="" width="34" height="24"><span>R. Olegário Mariano, 579</span></div>
+    <!-- Versão B: logo grande e fotos trocando ao fundo -->
+    <div class="hero-b" hidden>
+      <div class="hb-slides" aria-hidden="true">
+        <picture class="hb-slide is-on"><source media="(max-width:767px)" srcset="fotos/topo-cardio-celular.jpg"><img src="fotos/topo-cardio.jpg" alt="" width="1920" height="1080"></picture>
+        <picture class="hb-slide"><source media="(max-width:767px)" srcset="fotos/topo-racks-celular.jpg"><img src="fotos/topo-racks.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>
+        <picture class="hb-slide"><source media="(max-width:767px)" srcset="fotos/fachada.jpg"><img src="fotos/legpress.jpg" alt="" width="1366" height="586" loading="lazy"></picture>
+      </div>
+      <div class="hb-center">
+        <img class="hb-logo" src="assets/logo-escuro.svg" alt="Steelbox Academia" width="1100" height="208">
+        <p class="hb-claim">Forjados <b>no aço</b></p>
+      </div>
+      <div class="hb-bottom">
+        <p>Agora Uvaranas tem uma academia de verdade. Aparelhos novos, espaço de sobra e professores que corrigem a sua execução.</p>
+        <div class="hero-actions">
+          <a class="btn btn-blue magnetic" href="https://wa.me/5542984197324?text=Ol%C3%A1!%20Quero%20agendar%20uma%20visita%20na%20Steelbox." target="_blank" rel="noopener"><span>Agendar uma visita</span></a>
+          <a class="btn btn-line" href="#unidades"><span>Ver as unidades</span></a>
+        </div>
+        <div class="hb-dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></div>
       </div>
     </div>
   </section>
